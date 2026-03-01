@@ -13,44 +13,7 @@ Labhan is a modern web application designed to connect customers with laundry se
 - **Backend / Database**: Convex
 - **Hosting / Deployment**: Vercel (recommended)
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js (v18+)
-- npm, pnpm, or yarn
-
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/urkiddennn/labhan.git
-   ```
-
-2. Navigate to the project directory:
-   ```bash
-   cd labhan
-   ```
-
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-4. Start the development server (runs on `localhost:5173` by default):
-   ```bash
-   npm run dev
-   ```
-
-5. Start the Convex backend (in a separate terminal):
-   ```bash
-   npx convex dev
-   ```
 
 ## License
 
 This project is licensed under the MIT License.
-
-## Contact
-
-For support or questions, please email `support@labhan.ph`.
