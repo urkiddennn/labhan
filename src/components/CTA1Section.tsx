@@ -22,7 +22,7 @@ const CTA1Section: React.FC = () => {
                         Hayaan mong kami na ang sumalo ng gawain mo. Sa Labhan, makakasiguro kang
                         malinis at mabango ang mga damit mo na parang bago. Tipid sa oras, tipid sa pagod.
                     </p>
-                    <button className="bg-[#f7a83a] text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-orange-500 transition-colors transform hover:-translate-y-1">
+                    <button className="bg-[#f7a83a] text-white px-8 py-3 rounded-full font-bold hover:bg-orange-500 transition-colors transform hover:-translate-y-1">
                         Tawagan Kami Ngayon
                     </button>
                 </div>

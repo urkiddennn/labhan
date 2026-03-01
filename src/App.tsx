@@ -1,28 +1,22 @@
 
-
-import Header from './components/Header';
-import HeroSection from './components/HeroSection';
-import ServicesSection from './components/ServicesSection';
-import CTA1Section from './components/CTA1Section';
-import CTA2Section from './components/CTA2Section';
-import TestimonialsSection from './components/TestimonialsSection';
-import FAQSection from './components/FAQSection';
-import NewsletterSection from './components/NewsletterSection';
-import Footer from './components/Footer';
+import HeroPage from './components/pages/Hero';
+import { Routes, Route } from 'react-router-dom';
+import LoginPage from './components/pages/Login';
+import SignupPage from './components/pages/Signup';
+import CustomerDashboard from './components/pages/CustomerDashboard';
+import OwnerDashboard from './components/pages/OwnerDashboard';
+import SetupShop from './components/pages/SetupShop';
 
 function App() {
   return (
-    <div className="font-sans text-gray-800 bg-white">
-      <Header />
-      <HeroSection />
-      <ServicesSection />
-      <CTA1Section />
-      <CTA2Section />
-      <TestimonialsSection />
-      <FAQSection />
-      <NewsletterSection />
-      <Footer />
-    </div>
+    <Routes>
+      <Route path="/" element={<HeroPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/signup" element={<SignupPage />} />
+      <Route path="/setup-shop" element={<SetupShop />} />
+      <Route path="/customer-dashboard" element={<CustomerDashboard />} />
+      <Route path="/owner-dashboard" element={<OwnerDashboard />} />
+    </Routes>
   );
 }
 

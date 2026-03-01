@@ -35,3 +35,22 @@ export const createShop = mutation({
         });
     },
 });
+export const updateShop = mutation({
+    args: {
+        shopId: v.id("shops"),
+        name: v.optional(v.string()),
+        latitude: v.optional(v.number()),
+        longitude: v.optional(v.number()),
+    },
+    handler: async (ctx, args) => {
+        const { shopId, ...updates } = args;
+        await ctx.db.patch(shopId, updates);
+    },
+});
+
+export const listAll = query({
+    args: {},
+    handler: async (ctx) => {
+        return await ctx.db.query("shops").collect();
+    },
+});

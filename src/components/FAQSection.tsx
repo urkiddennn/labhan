@@ -61,7 +61,7 @@ const FAQSection: React.FC = () => {
                     <img
                         src="https://images.unsplash.com/photo-1582735689369-0fe89e00caeb?q=80&w=600&auto=format&fit=crop"
                         alt="Customer asking questions"
-                        className="w-full auto rounded-[2rem] shadow-2xl"
+                        className="w-full auto rounded-[2rem]"
                     />
                     <div className="absolute top-10 right-10 flex -space-x-4">
                         <div className="w-16 h-16 rounded-full bg-[#f7a83a] opacity-50 absolute -top-4 -right-4 blur-xl"></div>

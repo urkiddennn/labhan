@@ -30,7 +30,7 @@ const CTA2Section: React.FC = () => {
                     Ibigay mo sa amin ang iyong oras. Mula sa pagkuha hanggang sa
                     paghatid ng iyong malinis na damit, kami ang iyong maaasahang partner.
                 </p>
-                <button className="bg-white text-orange-400 px-8 py-3 rounded-full font-bold shadow-lg shadow-[#5aacb8] hover:bg-gray-100 transition-colors transform hover:-translate-y-1">
+                <button className="bg-white text-orange-400 px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition-colors transform hover:-translate-y-1">
                     Alamin Ang Detalye
                 </button>
             </div>

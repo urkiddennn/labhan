@@ -17,14 +17,24 @@ export default defineSchema({
 
     orders: defineTable({
         shopId: v.id("shops"),
-        customerId: v.id("customers"),
+        userId: v.optional(v.id("users")), // Connect directly to the authenticated user
+        serviceName: v.optional(v.string()), // Added to track selected service
         status: v.string(),
         totalAmount: v.number(),
-    }).index("by_shop", ["shopId"]),
+        createdAt: v.optional(v.number()),
+    }).index("by_shop", ["shopId"])
+        .index("by_user", ["userId"]),
 
     services: defineTable({
         shopId: v.id("shops"),
         name: v.string(),
         price: v.number(),
-    }).index("by_shop", ["shopId"])
+    }).index("by_shop", ["shopId"]),
+
+    users: defineTable({
+        name: v.optional(v.string()),
+        email: v.string(),
+        password: v.string(),
+        role: v.optional(v.string()),
+    }).index("by_email", ["email"]),
 });

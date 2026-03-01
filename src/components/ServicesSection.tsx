@@ -1,52 +1,55 @@
 import React from 'react';
-import { Truck, Droplets, Percent, Shirt } from 'lucide-react';
+import { Droplets, Percent, Shirt, Search } from 'lucide-react';
 
 const services = [
     {
-        icon: <Truck size={32} className="text-orange-500" />,
-        title: 'Laundry Pickup',
-        description: 'Kukunin namin ang labahin mo sa iyong bahay.',
-        link: 'Alamin ang detalye'
+        icon: <Search size={32} className="text-[#69b8c4]" />,
+        title: 'Find Shops Nearby',
+        description: 'See every active laundry shop in your area on a live map.',
+        link: 'Explore Map'
     },
     {
-        icon: <Droplets size={32} className="text-orange-400" />,
-        title: 'Wash And Fold',
-        description: 'Malinis na paglalaba at maayos na pagtutupi ng mga damit.',
-        link: 'Alamin ang detalye'
+        icon: <Droplets size={32} className="text-[#69b8c4]" />,
+        title: 'Instant Booking',
+        description: 'Pumili ng shop at mag-book agad ng iyong labada gamit ang app.',
+        link: 'Book Now'
     },
     {
-        icon: <Percent size={32} className="text-yellow-600" />,
-        title: 'Bulk Discount',
-        description: 'Makakuha ng diskwento sa maramihang pagpapalaba.',
-        link: 'Alamin ang detalye'
+        icon: <Shirt size={32} className="text-[#69b8c4]" />,
+        title: 'Real-time Tracking',
+        description: 'Malaman ang status ng iyong labahin kung ito ay nilalabhan na o pwede na kunin.',
+        link: 'Track Progress'
     },
     {
-        icon: <Shirt size={32} className="text-blue-400" />,
-        title: 'Dry Cleaning',
-        description: 'Espesyal na paglilinis para sa mga maseselang tela.',
-        link: 'Alamin ang detalye'
+        icon: <Percent size={32} className="text-[#69b8c4]" />,
+        title: 'Simple Pricing',
+        description: 'Transparent na presyo para sa lahat ng uri ng serbisyo ng labada.',
+        link: 'View Prices'
     }
 ];
 
 const ServicesSection: React.FC = () => {
     return (
-        <section className="py-20 px-4 md:px-12 bg-white">
-            <div className="max-w-7xl mx-auto">
-                <h2 className="text-4xl md:text-5xl font-extrabold text-center text-[#69b8c4] mb-16">
-                    Aming Serbisyo
-                </h2>
+        <section className="py-24 px-4 md:px-12 bg-white">
+            <div className="max-w-7xl mx-auto px-4">
+                <div className="text-center mb-20">
+                    <h2 className="text-5xl font-black text-slate-800 italic uppercase tracking-tighter mb-4">
+                        Aming <span className="text-[#69b8c4]">System</span>
+                    </h2>
+                    <p className="text-slate-400 font-bold uppercase tracking-[0.2em] text-sm italic">Simpler, Faster, Better Laundry</p>
+                </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {services.map((service, index) => (
-                        <div key={index} className="bg-[#E6F4F8] rounded-3xl p-8 flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2">
-                            <div className="bg-white p-4 rounded-full shadow-md mb-6 inline-flex">
+                        <div key={index} className="bg-slate-50 group hover:bg-white rounded-[3rem] p-10 flex flex-col items-center text-center transition-all duration-500 border border-slate-100 hover:border-[#69b8c4]/30 hover:-translate-y-2">
+                            <div className="bg-white p-6 rounded-[2rem] mb-8 inline-flex group-hover:scale-110 transition-transform duration-500 border border-slate-100">
                                 {service.icon}
                             </div>
-                            <h3 className="text-xl font-bold text-gray-800 mb-4">{service.title}</h3>
-                            <p className="text-gray-500 mb-6 flex-grow">{service.description}</p>
-                            <a href="#" className="flex items-center text-orange-400 font-semibold hover:text-orange-600 transition-colors">
-                                {service.link} <span className="ml-2">→</span>
-                            </a>
+                            <h3 className="text-xl font-black text-slate-800 mb-4 italic uppercase tracking-tight">{service.title}</h3>
+                            <p className="text-slate-500 mb-8 flex-grow font-medium text-sm italic">{service.description}</p>
+                            <span className="text-xs font-black uppercase tracking-widest text-[#69b8c4] group-hover:tracking-[0.2em] transition-all duration-500">
+                                {service.link}
+                            </span>
                         </div>
                     ))}
                 </div>

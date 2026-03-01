@@ -10,9 +10,3 @@
     color: #4a5568;
   }
 }
-
-.text-gradient {
-  background: linear-gradient(to right, #6bb6c4, #e4a142);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
