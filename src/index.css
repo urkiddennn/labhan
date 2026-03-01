@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Outfit', sans-serif;
+    color: #4a5568;
+  }
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #6bb6c4, #e4a142);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
