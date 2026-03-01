@@ -35,6 +35,7 @@ const HeroSection: React.FC = () => {
                         <img
                             src="https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?q=80&w=800&auto=format&fit=crop"
                             alt="Laundry Setup"
+                            fetchPriority="high"
                             className="w-full h-full object-cover rounded-[3.5rem]"
                         />
 
