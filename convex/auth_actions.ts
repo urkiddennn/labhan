@@ -4,6 +4,7 @@ import { signToken } from "./auth";
 import { api } from "./_generated/api";
 import type { Id } from "./_generated/dataModel";
 import bcrypt from "bcryptjs";
+import { verifyTurnstile } from "./turnstile";
 
 interface LoginResult {
     token: string;
@@ -19,8 +20,15 @@ export const login = action({
     args: {
         email: v.string(),
         password: v.string(),
+        turnstileToken: v.string(),
     },
     handler: async (ctx, args): Promise<LoginResult> => {
+        // Verify Turnstile token first
+        const isHuman = await verifyTurnstile(ctx, args.turnstileToken);
+        if (!isHuman) {
+            throw new Error("Bot detection failed. Please try again.");
+        }
+
         //  Find user by email
         const user = await ctx.runQuery(api.users.getUserByEmail, { email: args.email });
 
@@ -55,8 +63,15 @@ export const signup = action({
         password: v.string(),
         name: v.optional(v.string()),
         role: v.string(),
+        turnstileToken: v.string(),
     },
     handler: async (ctx, args): Promise<LoginResult> => {
+        // Verify Turnstile token first
+        const isHuman = await verifyTurnstile(ctx, args.turnstileToken);
+        if (!isHuman) {
+            throw new Error("Bot detection failed. Please try again.");
+        }
+
         // 1. Hash the password before saving
         const hashedPassword = await bcrypt.hash(args.password, 10);
 

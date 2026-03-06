@@ -5,6 +5,7 @@ import { useAuthStore } from "../../store/useAuthStore";
 import { useNavigate, Link } from "react-router-dom";
 import { useAction } from "convex/react";
 import { api } from "../../../convex/_generated/api";
+import TurnstileWidget from "../common/TurnstileWidget";
 
 const SignupPage: React.FC = () => {
     const [email, setEmail] = useState("");
@@ -13,6 +14,7 @@ const SignupPage: React.FC = () => {
     const [role, setRole] = useState<"customer" | "owner">("customer");
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
     const setAuth = useAuthStore((state) => state.setAuth);
     const signupAction = useAction(api.auth_actions.signup);
@@ -23,8 +25,14 @@ const SignupPage: React.FC = () => {
         setIsLoading(true);
         setError(null);
 
+        if (!turnstileToken) {
+            setError("Please complete the bot protection check.");
+            setIsLoading(false);
+            return;
+        }
+
         try {
-            const result = await signupAction({ email, password, name, role });
+            const result = await signupAction({ email, password, name, role, turnstileToken });
             setAuth(result.user, result.token);
 
             // Redirect based on role
@@ -126,7 +134,7 @@ const SignupPage: React.FC = () => {
                                     />
                                 </div>
                             </div>
-
+                            <TurnstileWidget onVerify={setTurnstileToken} />
                             <button
                                 type="submit"
                                 disabled={isLoading}

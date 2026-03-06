@@ -4,12 +4,14 @@ import { useAuthStore } from "../../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
 import { useAction } from "convex/react";
 import { api } from "../../../convex/_generated/api";
+import TurnstileWidget from "../common/TurnstileWidget";
 
 const LoginPage: React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
     const setAuth = useAuthStore((state) => state.setAuth);
     const loginAction = useAction(api.auth_actions.login);
@@ -20,8 +22,14 @@ const LoginPage: React.FC = () => {
         setIsLoading(true);
         setError(null);
 
+        if (!turnstileToken) {
+            setError("Please complete the bot protection check.");
+            setIsLoading(false);
+            return;
+        }
+
         try {
-            const result = await loginAction({ email, password });
+            const result = await loginAction({ email, password, turnstileToken });
             setAuth(result.user, result.token);
 
             // Redirect based on role
@@ -96,7 +104,7 @@ const LoginPage: React.FC = () => {
                                     <input type="checkbox" id="remember" className="w-4 h-4 rounded border-gray-300 text-[#69b8c4] focus:ring-[#69b8c4]" />
                                     <label htmlFor="remember" className="text-sm text-gray-600 cursor-pointer">Remember me</label>
                                 </div>
-
+                                <TurnstileWidget onVerify={setTurnstileToken} />
                                 <button
                                     type="submit"
                                     disabled={isLoading}
