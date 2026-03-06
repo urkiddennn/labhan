@@ -50,11 +50,11 @@ const LocationMarker = ({
 };
 
 const OwnerDashboard: React.FC = () => {
-  const { user, logout } = useAuthStore();
+  const { token, logout } = useAuthStore();
   const navigate = useNavigate();
 
   const shops = useQuery(api.shops.getShopsByOwner, {
-    ownerId: user?.id || "",
+    token: token || "",
   });
   const shop = shops && shops.length > 0 ? shops[0] : null;
 
@@ -99,6 +99,7 @@ const OwnerDashboard: React.FC = () => {
     try {
       setIsUpdatingLocation(true);
       await updateShopInfo({
+        token: token || "",
         shopId: shop._id,
         latitude: mapPos[0],
         longitude: mapPos[1],
@@ -116,10 +117,11 @@ const OwnerDashboard: React.FC = () => {
     setEditingId(service._id);
     setEditPrice(service.price.toString());
   };
+
   // handle save
   const handleSave = async (serviceId: any) => {
     try {
-      await updateService({ serviceId, price: Number(editPrice) });
+      await updateService({ token: token || "", serviceId, price: Number(editPrice) });
       setEditingId(null);
     } catch (err) {
       alert("Failed to update price");
@@ -130,6 +132,7 @@ const OwnerDashboard: React.FC = () => {
     if (!shop) return;
     try {
       await addService({
+        token: token || "",
         shopId: shop._id,
         name: newName,
         price: Number(newPrice),
@@ -144,13 +147,13 @@ const OwnerDashboard: React.FC = () => {
 
   const handleDelete = async (serviceId: any) => {
     if (confirm("Are you sure you want to delete this service?")) {
-      await deleteService({ serviceId });
+      await deleteService({ token: token || "", serviceId });
     }
   };
 
   const handleUpdateStatus = async (orderId: any, status: string) => {
     try {
-      await updateOrderStatus({ orderId, status });
+      await updateOrderStatus({ token: token || "", orderId, status });
     } catch (err) {
       alert("Failed to update status");
     }
@@ -174,7 +177,7 @@ const OwnerDashboard: React.FC = () => {
 
       <main className="max-w-8xl mx-auto p-6 space-y-10 md:flex justify-center items-start block gap-2">
         {!shop ? (
-          <div className="text-center py-20 bg-white rounded-3xl border border-dashed border-slate-300">
+          <div className="text-center py-20 bg-white rounded-md border border-dashed border-slate-300">
             <h2 className="text-2xl font-bold text-slate-400 italic">
               No shop associated with your account.
             </h2>
@@ -184,7 +187,7 @@ const OwnerDashboard: React.FC = () => {
           </div>
         ) : (
           <>
-            <section className="bg-white p-8 rounded-[2.5rem] border border-slate-200 space-y-6 md:w-3/5 w-full md:h-screen">
+            <section className="bg-white p-8 rounded-md border border-slate-200 space-y-6 md:w-3/5 w-full">
               <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
                 <MapPin className="text-[#69b8c4]" size={24} />
                 Shop Location Settings
@@ -193,7 +196,7 @@ const OwnerDashboard: React.FC = () => {
                 Click on the map to set your laundry shop's new location.
               </p>
 
-              <div className="w-full md:h-full h-1/2 rounded-3xl border border-slate-200 overflow-hidden relative z-0">
+              <div className="w-full h-[400px] md:h-[600px] rounded-md border border-slate-200 overflow-hidden relative z-0">
                 {mapPos && (
                   <MapContainer
                     center={mapPos}
@@ -218,7 +221,7 @@ const OwnerDashboard: React.FC = () => {
                 <button
                   onClick={handleSaveLocation}
                   disabled={isUpdatingLocation}
-                  className="bg-[#69b8c4] text-white px-6 py-2.5 rounded-2xl text-sm font-bold border border-[#69b8c4] hover:scale-105 transition-all disabled:opacity-50"
+                  className="bg-[#69b8c4] text-white px-6 py-2.5 rounded-md text-sm font-bold border border-[#69b8c4] hover:scale-105 transition-all disabled:opacity-50"
                 >
                   {isUpdatingLocation ? "Updating..." : "Save New Location"}
                 </button>
@@ -238,7 +241,7 @@ const OwnerDashboard: React.FC = () => {
                       <Loader2 className="animate-spin text-[#69b8c4]" />
                     </div>
                   ) : orders.length === 0 ? (
-                    <div className="bg-white p-8 rounded-[2.5rem] border border-slate-200 text-center">
+                    <div className="bg-white p-8 rounded-md border border-slate-200 text-center">
                       <p className="text-slate-400 font-medium italic">
                         No active orders at the moment. Update your prices below
                         to attract more customers!
@@ -248,10 +251,10 @@ const OwnerDashboard: React.FC = () => {
                     orders.map((order) => (
                       <div
                         key={order._id}
-                        className="bg-white p-6 rounded-3xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                        className="bg-white p-6 rounded-md border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                       >
                         <div className="flex items-center gap-4">
-                          <div className="bg-slate-100 p-3 rounded-2xl text-[#69b8c4]">
+                          <div className="bg-slate-100 p-3 rounded-md text-[#69b8c4]">
                             <User size={24} />
                           </div>
                           <div className="space-y-1">
@@ -273,7 +276,7 @@ const OwnerDashboard: React.FC = () => {
                             onChange={(e) =>
                               handleUpdateStatus(order._id, e.target.value)
                             }
-                            className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm font-semibold focus:ring-2 focus:ring-[#69b8c4]/20 outline-none"
+                            className="bg-slate-50 border border-slate-200 rounded-md px-4 py-2 text-sm font-semibold focus:ring-2 focus:ring-[#69b8c4]/20 outline-none"
                           >
                             <option value="pending">Pending</option>
                             <option value="washing">Washing</option>
@@ -286,7 +289,7 @@ const OwnerDashboard: React.FC = () => {
                             onClick={() =>
                               handleUpdateStatus(order._id, "ready")
                             }
-                            className="flex items-center gap-2 bg-[#69b8c4] text-white px-4 py-2 rounded-xl text-sm font-bold hover:scale-105 transition-all border border-[#69b8c4]"
+                            className="flex items-center gap-2 bg-[#69b8c4] text-white px-4 py-2 rounded-md text-sm font-bold hover:scale-105 transition-all border border-[#69b8c4]"
                           >
                             <Send size={16} />
                             Mark as Ready
@@ -298,7 +301,7 @@ const OwnerDashboard: React.FC = () => {
                 </div>
               </section>
 
-              <section className="bg-white p-8 rounded-[2.5rem] border border-slate-200 transition-all">
+              <section className="bg-white p-8 rounded-md border border-slate-200 transition-all">
                 <div className="flex items-center justify-between mb-8">
                   <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
                     <CheckCircle className="text-[#69b8c4]" size={24} />
@@ -306,7 +309,7 @@ const OwnerDashboard: React.FC = () => {
                   </h2>
                   <button
                     onClick={() => setIsAdding(!isAdding)}
-                    className="flex items-center gap-2 bg-[#69b8c4] text-white px-5 py-2.5 rounded-2xl text-sm font-bold border border-[#69b8c4] hover:scale-105 active:scale-95 transition-all"
+                    className="flex items-center gap-2 bg-[#69b8c4] text-white px-5 py-2.5 rounded-md text-sm font-bold border border-[#69b8c4] hover:scale-105 active:scale-95 transition-all"
                   >
                     {isAdding ? <X size={18} /> : <Plus size={18} />}
                     {isAdding ? "Cancel" : "Add Service"}
@@ -314,26 +317,26 @@ const OwnerDashboard: React.FC = () => {
                 </div>
 
                 {isAdding && (
-                  <div className="mb-8 p-6 bg-slate-50 rounded-3xl border border-[#69b8c4]/30 space-y-4 animate-in fade-in slide-in-from-top-2">
+                  <div className="mb-8 p-6 bg-slate-50 rounded-md border border-[#69b8c4]/30 space-y-4 animate-in fade-in slide-in-from-top-2">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <input
                         type="text"
                         placeholder="Service Name (e.g. Wash & Fold)"
                         value={newName}
                         onChange={(e) => setNewName(e.target.value)}
-                        className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#69b8c4]/20 outline-none"
+                        className="w-full bg-white border border-slate-200 rounded-md px-4 py-3 text-sm focus:ring-2 focus:ring-[#69b8c4]/20 outline-none"
                       />
                       <input
                         type="number"
                         placeholder="Price (₱)"
                         value={newPrice}
                         onChange={(e) => setNewPrice(e.target.value)}
-                        className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-[#69b8c4]/20 outline-none"
+                        className="w-full bg-white border border-slate-200 rounded-md px-4 py-3 text-sm focus:ring-2 focus:ring-[#69b8c4]/20 outline-none"
                       />
                     </div>
                     <button
                       onClick={handleAdd}
-                      className="w-full bg-[#69b8c4] text-white py-3 rounded-xl font-bold hover:bg-[#5aa7b3] transition-all border border-[#69b8c4]"
+                      className="w-full bg-[#69b8c4] text-white py-3 rounded-md font-bold hover:bg-[#5aa7b3] transition-all border border-[#69b8c4]"
                     >
                       Save New Service
                     </button>
@@ -344,7 +347,7 @@ const OwnerDashboard: React.FC = () => {
                   {services?.map((service) => (
                     <div
                       key={service._id}
-                      className="group flex items-center justify-between p-5 bg-slate-50 hover:bg-white rounded-3xl border border-slate-100 hover:border-[#69b8c4]/30 transition-all"
+                      className="group flex items-center justify-between p-5 bg-slate-50 hover:bg-white rounded-md border border-slate-100 hover:border-[#69b8c4]/30 transition-all"
                     >
                       <div className="space-y-1">
                         <span className="font-bold text-slate-700 italic">
@@ -376,13 +379,13 @@ const OwnerDashboard: React.FC = () => {
                           <>
                             <button
                               onClick={() => handleSave(service._id)}
-                              className="p-2 bg-emerald-50 text-emerald-600 rounded-xl hover:bg-emerald-100 transition-colors border border-emerald-100"
+                              className="p-2 bg-emerald-50 text-emerald-600 rounded-md hover:bg-emerald-100 transition-colors border border-emerald-100"
                             >
                               <Save size={20} />
                             </button>
                             <button
                               onClick={() => setEditingId(null)}
-                              className="p-2 bg-slate-100 text-slate-500 rounded-xl hover:bg-slate-200 transition-colors border border-slate-200"
+                              className="p-2 bg-slate-100 text-slate-500 rounded-md hover:bg-slate-200 transition-colors border border-slate-200"
                             >
                               <X size={20} />
                             </button>
@@ -391,13 +394,13 @@ const OwnerDashboard: React.FC = () => {
                           <>
                             <button
                               onClick={() => handleEdit(service)}
-                              className="p-2 bg-white text-slate-400 rounded-xl hover:text-[#69b8c4] hover:bg-slate-50 transition-all border border-slate-100"
+                              className="p-2 bg-white text-slate-400 rounded-md hover:text-[#69b8c4] hover:bg-slate-50 transition-all border border-slate-100"
                             >
                               <Edit2 size={18} />
                             </button>
                             <button
                               onClick={() => handleDelete(service._id)}
-                              className="p-2 bg-white text-slate-400 rounded-xl hover:text-red-500 hover:bg-red-50 transition-all border border-slate-100"
+                              className="p-2 bg-white text-slate-400 rounded-md hover:text-red-500 hover:bg-red-50 transition-all border border-slate-100"
                             >
                               <Trash2 size={18} />
                             </button>

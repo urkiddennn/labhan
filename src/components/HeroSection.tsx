@@ -21,28 +21,28 @@ const HeroSection: React.FC = () => {
                     </p>
 
                     <div className="flex flex-wrap gap-6 justify-center md:justify-start">
-                        <button onClick={handleLogin} className="bg-[#f7a83a] text-white px-10 py-5 rounded-3xl font-black italic uppercase tracking-widest hover:bg-orange-500 transition-all border-2 border-orange-300 hover:-translate-y-1 active:scale-95">
+                        <button onClick={handleLogin} className="bg-[#f7a83a] text-white px-10 py-5 rounded-md font-black italic uppercase tracking-widest hover:bg-orange-500 transition-all border-2 border-orange-300 hover:-translate-y-1 active:scale-95">
                             Register Shop
                         </button>
-                        <button onClick={handleLogin} className="bg-[#69b8c4] text-white px-10 py-5 rounded-3xl font-black italic uppercase tracking-widest hover:bg-[#5aa7b3] transition-all border-2 border-cyan-400 hover:-translate-y-1 active:scale-95">
+                        <button onClick={handleLogin} className="bg-[#69b8c4] text-white px-10 py-5 rounded-md font-black italic uppercase tracking-widest hover:bg-[#5aa7b3] transition-all border-2 border-cyan-400 hover:-translate-y-1 active:scale-95">
                             Find a Shop
                         </button>
                     </div>
                 </div>
 
                 <div className="md:w-1/2 relative flex justify-center mt-8 md:mt-0">
-                    <div className="w-full h-[500px] max-w-md relative bg-white p-2 rounded-[4rem] border-4 border-slate-100 -rotate-3 hover:rotate-0 transition-transform duration-700 overflow-hidden">
+                    <div className="w-full h-[500px] max-w-md relative bg-white p-2 rounded-md border-4 border-slate-100 -rotate-3 hover:rotate-0 transition-transform duration-700 overflow-hidden">
                         <img
                             src="https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?q=80&w=800&auto=format&fit=crop"
                             alt="Laundry Setup"
                             fetchPriority="high"
                             width="448"
                             height="500"
-                            className="w-full h-full object-cover rounded-[3.5rem]"
+                            className="w-full h-full object-cover rounded-md"
                         />
 
                         {/* Status Bubbles - Simplified, no shadows */}
-                        <div className="absolute top-12 -right-4 bg-[#f7a83a] text-white p-4 rounded-3xl flex items-center gap-3 border-4 border-white animate-bounce" style={{ animationDuration: '4s' }}>
+                        <div className="absolute top-12 -right-4 bg-[#f7a83a] text-white p-4 rounded-md flex items-center gap-3 border-4 border-white animate-bounce" style={{ animationDuration: '4s' }}>
                             <MapPin size={24} />
                             <div className="hidden sm:block">
                                 <h4 className="font-black text-xs uppercase tracking-tighter italic leading-none">Shops</h4>
@@ -50,7 +50,7 @@ const HeroSection: React.FC = () => {
                             </div>
                         </div>
 
-                        <div className="absolute bottom-12 -left-4 bg-[#69b8c4] text-white p-4 rounded-3xl flex items-center gap-3 border-4 border-white">
+                        <div className="absolute bottom-12 -left-4 bg-[#69b8c4] text-white p-4 rounded-md flex items-center gap-3 border-4 border-white">
                             <Clock size={24} />
                             <div className="hidden sm:block">
                                 <h4 className="font-black text-xs uppercase tracking-tighter italic leading-none">Status</h4>

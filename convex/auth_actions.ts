@@ -1,6 +1,7 @@
 import { action } from "./_generated/server";
 import { v } from "convex/values";
 import { signToken } from "./auth";
+import { rateLimiter } from "./rateLimit";
 import { api } from "./_generated/api";
 import type { Id } from "./_generated/dataModel";
 import bcrypt from "bcryptjs";
@@ -29,7 +30,10 @@ export const login = action({
             throw new Error("Bot detection failed. Please try again.");
         }
 
-        //  Find user by email
+        // Apply rate limiting by email
+        await rateLimiter.limit(ctx, "login", { key: args.email });
+
+        // Find user by email
         const user = await ctx.runQuery(api.users.getUserByEmail, { email: args.email });
 
         if (!user) {
@@ -42,7 +46,7 @@ export const login = action({
             throw new Error("Invalid password");
         }
 
-        //  Generate JWT
+        // Generate JWT
         const token = await signToken({ userId: user._id, email: user.email });
 
         return {
@@ -71,6 +75,9 @@ export const signup = action({
         if (!isHuman) {
             throw new Error("Bot detection failed. Please try again.");
         }
+
+        // Apply rate limiting by email
+        await rateLimiter.limit(ctx, "signup", { key: args.email });
 
         // 1. Hash the password before saving
         const hashedPassword = await bcrypt.hash(args.password, 10);

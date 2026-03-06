@@ -1,9 +1,11 @@
 /// <reference types="node" />
 import { SignJWT, jwtVerify } from "jose";
 
-const JWT_SECRET = new TextEncoder().encode(
-    process.env.JWT_SECRET || "your-secret-key-at-least-32-chars-long"
-);
+const jwtSecretEnv = process.env.JWT_SECRET;
+if (!jwtSecretEnv) {
+    throw new Error("Missing JWT_SECRET environment variable. Please set it in your Convex deployment settings.");
+}
+const JWT_SECRET = new TextEncoder().encode(jwtSecretEnv);
 
 export async function signToken(payload: any) {
     return await new SignJWT(payload)

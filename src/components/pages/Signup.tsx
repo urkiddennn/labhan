@@ -72,9 +72,9 @@ const SignupPage: React.FC = () => {
     <div className="min-h-screen flex flex-col font-sans text-gray-800 bg-gray-50">
       <main className="flex-grow flex items-center justify-center py-20 px-4">
         <div className="w-full max-w-md">
-          <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 md:p-10">
+          <div className="bg-white rounded-md shadow-xl border border-gray-100 p-8 md:p-10">
             <button
-              className="bg-gray-200 rounded-3xl w-auto px-5 py-3 flex justify-center items-center gap-3 "
+              className="bg-gray-200 rounded-md w-auto px-5 py-3 flex justify-center items-center gap-3 "
               onClick={HandleBackHome}
             >
               <ArrowBigLeft size={20} className="text-gray-400" />
@@ -89,7 +89,7 @@ const SignupPage: React.FC = () => {
 
             <form className="space-y-6" onSubmit={handleSubmit}>
               {error && (
-                <div className="bg-red-50 text-red-600 p-4 rounded-xl text-sm font-medium border border-red-100 italic text-center">
+                <div className="bg-red-50 text-red-600 p-4 rounded-md text-sm font-medium border border-red-100 italic text-center">
                   {error}
                 </div>
               )}
@@ -99,11 +99,10 @@ const SignupPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setRole("customer")}
-                  className={`flex flex-col items-center p-4 rounded-2xl border-2 transition-all ${
-                    role === "customer"
+                  className={`flex flex-col items-center p-4 rounded-md border-2 transition-all ${role === "customer"
                       ? "border-[#69b8c4] bg-[#69b8c4]/5 text-[#69b8c4]"
                       : "border-gray-100 bg-gray-50 text-gray-400 hover:bg-gray-100"
-                  }`}
+                    }`}
                 >
                   <UserCircle size={24} className="mb-2" />
                   <span className="text-xs font-bold uppercase tracking-wider">
@@ -113,11 +112,10 @@ const SignupPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setRole("owner")}
-                  className={`flex flex-col items-center p-4 rounded-2xl border-2 transition-all ${
-                    role === "owner"
+                  className={`flex flex-col items-center p-4 rounded-md border-2 transition-all ${role === "owner"
                       ? "border-[#69b8c4] bg-[#69b8c4]/5 text-[#69b8c4]"
                       : "border-gray-100 bg-gray-50 text-gray-400 hover:bg-gray-100"
-                  }`}
+                    }`}
                 >
                   <Store size={24} className="mb-2" />
                   <span className="text-xs font-bold uppercase tracking-wider">
@@ -139,7 +137,7 @@ const SignupPage: React.FC = () => {
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3.5 bg-white border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#69b8c4]/20 focus:border-[#69b8c4] transition-all"
+                    className="w-full pl-12 pr-4 py-3.5 bg-white border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-[#69b8c4]/20 focus:border-[#69b8c4] transition-all"
                     placeholder="Juan Dela Cruz"
                   />
                 </div>
@@ -159,7 +157,7 @@ const SignupPage: React.FC = () => {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3.5 bg-white border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#69b8c4]/20 focus:border-[#69b8c4] transition-all"
+                    className="w-full pl-12 pr-4 py-3.5 bg-white border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-[#69b8c4]/20 focus:border-[#69b8c4] transition-all"
                     placeholder="name@email.com"
                   />
                 </div>
@@ -179,7 +177,7 @@ const SignupPage: React.FC = () => {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3.5 bg-white border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#69b8c4]/20 focus:border-[#69b8c4] transition-all"
+                    className="w-full pl-12 pr-4 py-3.5 bg-white border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-[#69b8c4]/20 focus:border-[#69b8c4] transition-all"
                     placeholder="••••••••"
                   />
                 </div>
@@ -188,7 +186,7 @@ const SignupPage: React.FC = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-[#69b8c4] hover:bg-[#5aa7b3] disabled:bg-[#a5d5db] text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 shadow-lg shadow-[#69b8c4]/30 transform transition-all active:scale-[0.98]"
+                className="w-full bg-[#69b8c4] hover:bg-[#5aa7b3] disabled:bg-[#a5d5db] text-white font-bold py-4 rounded-md flex items-center justify-center gap-2 shadow-lg shadow-[#69b8c4]/30 transform transition-all active:scale-[0.98]"
               >
                 {isLoading ? (
                   <Loader2 size={20} className="animate-spin" />

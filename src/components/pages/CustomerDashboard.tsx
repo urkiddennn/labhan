@@ -31,14 +31,14 @@ L.Icon.Default.mergeOptions({
 });
 
 const CustomerDashboard: React.FC = () => {
-  const { user, logout } = useAuthStore();
+  const { user, token, logout } = useAuthStore();
   const navigate = useNavigate();
 
   const [selectedShop, setSelectedShop] = useState<any>(null);
 
   const shops = useQuery(api.shops.listAll);
   const myOrders = useQuery(api.orders.listUserOrders, {
-    userId: (user?.id as any) || "",
+    token: token || "",
   });
   const availableServices = useQuery(
     api.services.listServices,
@@ -62,8 +62,8 @@ const CustomerDashboard: React.FC = () => {
     if (!user || !selectedShop) return;
     try {
       await bookLaundry({
+        token: token || "",
         shopId: selectedShop._id,
-        userId: user.id as any,
         serviceName: service.name,
         totalAmount: service.price,
       });
@@ -104,14 +104,14 @@ const CustomerDashboard: React.FC = () => {
                 <Loader2 className="animate-spin text-[#69b8c4]" />
               </div>
             ) : myOrders.length === 0 ? (
-              <div className="bg-white p-8 rounded-2xl border border-dashed border-slate-300 text-center text-slate-400 italic">
+              <div className="bg-white p-8 rounded-md border border-dashed border-slate-300 text-center text-slate-400 italic">
                 No active orders. Book one below!
               </div>
             ) : (
               myOrders.map((order) => (
                 <div
                   key={order._id}
-                  className="bg-white p-5 rounded-2xl border border-slate-200 flex items-center justify-between"
+                  className="bg-white p-5 rounded-md border border-slate-200 flex items-center justify-between"
                 >
                   <div>
                     <h3 className="font-bold text-slate-800">
@@ -128,11 +128,10 @@ const CustomerDashboard: React.FC = () => {
                   </div>
                   <div className="text-right">
                     <span
-                      className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider ${
-                        order.status === "Ready" || order.status === "collected"
-                          ? "bg-emerald-100 text-emerald-700"
-                          : "bg-blue-100 text-blue-700"
-                      }`}
+                      className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider ${order.status === "Ready" || order.status === "collected"
+                        ? "bg-emerald-100 text-emerald-700"
+                        : "bg-blue-100 text-blue-700"
+                        }`}
                     >
                       {order.status}
                     </span>
@@ -148,7 +147,7 @@ const CustomerDashboard: React.FC = () => {
             <MapPin className="text-[#69b8c4]" size={24} />
             Active Shops Map
           </h2>
-          <div className="w-full h-[400px] rounded-3xl border border-slate-200 overflow-hidden relative">
+          <div className="w-full h-[400px] rounded-md border border-slate-200 overflow-hidden relative">
             {shops === undefined ? (
               <div className="absolute inset-0 z-50 bg-slate-50/80 flex items-center justify-center">
                 <Loader2 className="animate-spin text-[#69b8c4]" size={32} />
@@ -176,7 +175,7 @@ const CustomerDashboard: React.FC = () => {
                         </h3>
                         <button
                           onClick={() => handleSelectShop(shop)}
-                          className="bg-[#69b8c4] text-white px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase w-full mt-2"
+                          className="bg-[#69b8c4] text-white px-3 py-1.5 rounded-md text-[10px] font-bold uppercase w-full mt-2"
                         >
                           Select Shop
                         </button>
@@ -207,7 +206,7 @@ const CustomerDashboard: React.FC = () => {
               shops.map((shop) => (
                 <div
                   key={shop._id}
-                  className="bg-white p-6 rounded-2xl border border-slate-200 hover:border-[#69b8c4] transition-all group"
+                  className="bg-white p-6 rounded-md border border-slate-200 hover:border-[#69b8c4] transition-all group"
                 >
                   <div className="flex justify-between items-start">
                     <div>
@@ -221,7 +220,7 @@ const CustomerDashboard: React.FC = () => {
                     </div>
                     <button
                       onClick={() => handleSelectShop(shop)}
-                      className="bg-[#69b8c4] text-white px-5 py-2 rounded-xl text-sm font-bold border border-[#69b8c4] hover:scale-105 active:scale-95 transition-all flex items-center gap-1"
+                      className="bg-[#69b8c4] text-white px-5 py-2 rounded-md text-sm font-bold border border-[#69b8c4] hover:scale-105 active:scale-95 transition-all flex items-center gap-1"
                     >
                       <Plus size={16} /> Book
                     </button>
@@ -236,7 +235,7 @@ const CustomerDashboard: React.FC = () => {
       {/* Service Selection Modal */}
       {selectedShop && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-300">
-          <div className="bg-white w-full max-w-lg rounded-[2.5rem] overflow-hidden border border-slate-100 animate-in zoom-in-95 duration-300">
+          <div className="bg-white w-full max-w-lg rounded-md overflow-hidden border border-slate-100 animate-in zoom-in-95 duration-300">
             <div className="p-8 border-b border-slate-50 flex items-center justify-between bg-slate-50/50">
               <div>
                 <h3 className="text-2xl font-black text-slate-800 italic uppercase tracking-tight">
@@ -268,7 +267,7 @@ const CustomerDashboard: React.FC = () => {
                   <button
                     key={service._id}
                     onClick={() => handleConfirmBooking(service)}
-                    className="w-full flex items-center justify-between p-6 bg-slate-50 hover:bg-white border-2 border-transparent hover:border-[#69b8c4]/40 rounded-3xl transition-all group text-left"
+                    className="w-full flex items-center justify-between p-6 bg-slate-50 hover:bg-white border-2 border-transparent hover:border-[#69b8c4]/40 rounded-md transition-all group text-left"
                   >
                     <div>
                       <h4 className="font-black text-slate-800 group-hover:text-[#69b8c4] transition-colors italic uppercase">
@@ -278,7 +277,7 @@ const CustomerDashboard: React.FC = () => {
                         ₱{service.price}
                       </p>
                     </div>
-                    <div className="bg-white p-3 rounded-2xl text-slate-300 group-hover:text-[#69b8c4] group-hover:scale-110 transition-all border border-slate-50">
+                    <div className="bg-white p-3 rounded-md text-slate-300 group-hover:text-[#69b8c4] group-hover:scale-110 transition-all border border-slate-50">
                       <Check size={24} />
                     </div>
                   </button>

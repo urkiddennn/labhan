@@ -34,14 +34,14 @@ const TestimonialsSection: React.FC = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {testimonials.map((item, index) => (
-                        <div key={index} className="bg-white rounded-3xl p-8 border border-gray-100 border-t-8 border-t-yellow-100 flex flex-col items-center text-center">
+                        <div key={index} className="bg-white rounded-md p-8 border border-gray-100 border-t-8 border-t-yellow-100 flex flex-col items-center text-center">
                             <div className="flex gap-1 text-yellow-400 mb-6">
                                 {[...Array(5)].map((_, i) => (
                                     <Star key={i} size={20} fill="currentColor" stroke="none" />
                                 ))}
                             </div>
 
-                            <div className="w-20 h-20 rounded-full overflow-hidden mb-4 border-4 border-[#E6F4F8]">
+                            <div className="w-20 h-20 rounded-md overflow-hidden mb-4 border-4 border-[#E6F4F8]">
                                 <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                             </div>
 

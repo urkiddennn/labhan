@@ -65,9 +65,9 @@ const LoginPage: React.FC = () => {
       <main className="flex-grow flex items-center justify-center relative py-20 px-4 overflow-hidden">
         {/* Login Card */}
         <div className="relative z-10 w-full max-w-md">
-          <div className="bg-white rounded-3xl  border border-gray-200 overflow-hidden transform transition-all hover:scale-[1.01]">
+          <div className="bg-white rounded-md  border border-gray-200 overflow-hidden transform transition-all hover:scale-[1.01]">
             <div className="p-8 md:p-10">
-              <button className="bg-gray-200 rounded-3xl w-auto px-5 py-3 flex justify-center items-center gap-3 " onClick={HandleBackHome}>
+              <button className="bg-gray-200 rounded-md w-auto px-5 py-3 flex justify-center items-center gap-3 " onClick={HandleBackHome}>
                 <ArrowBigLeft size={20} className="text-gray-400" />
                 <h1>Back</h1>
               </button>
@@ -80,7 +80,7 @@ const LoginPage: React.FC = () => {
 
               <form className="space-y-6" onSubmit={handleSubmit}>
                 {error && (
-                  <div className="bg-red-50 text-red-600 p-4 rounded-xl text-sm font-medium border border-red-100 animate-in fade-in slide-in-from-top-2">
+                  <div className="bg-red-50 text-red-600 p-4 rounded-md text-sm font-medium border border-red-100 animate-in fade-in slide-in-from-top-2">
                     {error}
                   </div>
                 )}
@@ -98,7 +98,7 @@ const LoginPage: React.FC = () => {
                       placeholder="name@company.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full pl-12 pr-4 py-3.5 bg-white/50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#69b8c4]/20 focus:border-[#69b8c4] transition-all disabled:opacity-50"
+                      className="w-full pl-12 pr-4 py-3.5 bg-white/50 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-[#69b8c4]/20 focus:border-[#69b8c4] transition-all disabled:opacity-50"
                       required
                       disabled={isLoading}
                     />
@@ -127,7 +127,7 @@ const LoginPage: React.FC = () => {
                       placeholder="••••••••"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="w-full pl-12 pr-4 py-3.5 bg-white/50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#69b8c4]/20 focus:border-[#69b8c4] transition-all disabled:opacity-50"
+                      className="w-full pl-12 pr-4 py-3.5 bg-white/50 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-[#69b8c4]/20 focus:border-[#69b8c4] transition-all disabled:opacity-50"
                       required
                       disabled={isLoading}
                     />
@@ -151,7 +151,7 @@ const LoginPage: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-[#69b8c4] hover:bg-[#5aa7b3] disabled:bg-[#a5d5db] text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 shadow-lg shadow-[#69b8c4]/30 transform transition-all active:scale-[0.98]"
+                  className="w-full bg-[#69b8c4] hover:bg-[#5aa7b3] disabled:bg-[#a5d5db] text-white font-bold py-4 rounded-md flex items-center justify-center gap-2 shadow-lg shadow-[#69b8c4]/30 transform transition-all active:scale-[0.98]"
                 >
                   {isLoading ? (
                     <Loader2 size={20} className="animate-spin" />
@@ -176,11 +176,11 @@ const LoginPage: React.FC = () => {
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <button className="flex items-center justify-center gap-2 py-3 px-4 bg-white border border-gray-200 rounded-2xl hover:bg-gray-50 transition-colors font-semibold text-sm">
+                <button className="flex items-center justify-center gap-2 py-3 px-4 bg-white border border-gray-200 rounded-md hover:bg-gray-50 transition-colors font-semibold text-sm">
                   <Chrome size={18} className="text-[#DB4437]" />
                   Google
                 </button>
-                <button className="flex items-center justify-center gap-2 py-3 px-4 bg-white border border-gray-200 rounded-2xl hover:bg-gray-50 transition-colors font-semibold text-sm">
+                <button className="flex items-center justify-center gap-2 py-3 px-4 bg-white border border-gray-200 rounded-md hover:bg-gray-50 transition-colors font-semibold text-sm">
                   <Facebook size={18} className="text-[#4267B2]" />
                   Facebook
                 </button>

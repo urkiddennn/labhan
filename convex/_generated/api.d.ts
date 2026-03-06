@@ -11,6 +11,7 @@
 import type * as auth from "../auth.js";
 import type * as auth_actions from "../auth_actions.js";
 import type * as customers from "../customers.js";
+import type * as helpers from "../helpers.js";
 import type * as orders from "../orders.js";
 import type * as rateLimit from "../rateLimit.js";
 import type * as services from "../services.js";
@@ -28,6 +29,7 @@ declare const fullApi: ApiFromModules<{
   auth: typeof auth;
   auth_actions: typeof auth_actions;
   customers: typeof customers;
+  helpers: typeof helpers;
   orders: typeof orders;
   rateLimit: typeof rateLimit;
   services: typeof services;

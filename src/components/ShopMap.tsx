@@ -40,7 +40,7 @@ const ShopMap: React.FC = () => {
           </p>
         </div>
 
-        <div className="w-full h-[600px] rounded-[3rem] border-8 border-slate-50 overflow-hidden relative group transition-all duration-700 ">
+        <div className="w-full h-[600px] rounded-md border-8 border-slate-50 overflow-hidden relative group transition-all duration-700 ">
           {shops === undefined ? (
             <div className="absolute inset-0 z-50 bg-white/90 backdrop-blur-sm flex items-center justify-center">
               <div className="flex flex-col items-center gap-4">
@@ -67,14 +67,14 @@ const ShopMap: React.FC = () => {
                   position={[shop.latitude, shop.longitude]}
                 >
                   <Popup>
-                    <div className="p-3 text-center bg-white rounded-2xl">
+                    <div className="p-3 text-center bg-white rounded-md">
                       <h3 className="font-black italic uppercase tracking-tighter text-slate-800 text-lg mb-1 leading-none">
                         {shop.name}
                       </h3>
                       <p className="text-[#69b8c4] font-black text-[10px] uppercase tracking-widest italic mb-3">
                         Live Now
                       </p>
-                      <button className="bg-[#69b8c4] text-white px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-[#5aa7b3] transition-all w-full border-2 border-cyan-400 active:scale-95">
+                      <button className="bg-[#69b8c4] text-white px-5 py-2.5 rounded-md text-[10px] font-black uppercase tracking-widest hover:bg-[#5aa7b3] transition-all w-full border-2 border-cyan-400 active:scale-95">
                         Select Shop
                       </button>
                     </div>

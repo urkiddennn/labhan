@@ -34,7 +34,7 @@ const FAQSection: React.FC = () => {
                     {faqs.map((faq, index) => (
                         <div
                             key={index}
-                            className={`rounded-2xl overflow-hidden transition-colors ${openIndex === index ? 'bg-[#f7a83a] text-white' : 'bg-[#e7f5f8] text-gray-700'
+                            className={`rounded-md overflow-hidden transition-colors ${openIndex === index ? 'bg-[#f7a83a] text-white' : 'bg-[#e7f5f8] text-gray-700'
                                 }`}
                         >
                             <button
@@ -61,7 +61,7 @@ const FAQSection: React.FC = () => {
                     <img
                         src="https://images.unsplash.com/photo-1582735689369-0fe89e00caeb?q=80&w=600&auto=format&fit=crop"
                         alt="Customer asking questions"
-                        className="w-full auto rounded-[2rem]"
+                        className="w-full auto rounded-md"
                     />
                     <div className="absolute top-10 right-10 flex -space-x-4">
                         <div className="w-16 h-16 rounded-full bg-[#f7a83a] opacity-50 absolute -top-4 -right-4 blur-xl"></div>

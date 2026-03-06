@@ -41,8 +41,8 @@ const ServicesSection: React.FC = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {services.map((service, index) => (
-                        <div key={index} className="bg-slate-50 group hover:bg-white rounded-[3rem] p-10 flex flex-col items-center text-center transition-all duration-500 border border-slate-100 hover:border-[#69b8c4]/30 hover:-translate-y-2">
-                            <div className="bg-white p-6 rounded-[2rem] mb-8 inline-flex group-hover:scale-110 transition-transform duration-500 border border-slate-100">
+                        <div key={index} className="bg-slate-50 group hover:bg-white rounded-md p-10 flex flex-col items-center text-center transition-all duration-500 border border-slate-100 hover:border-[#69b8c4]/30 hover:-translate-y-2">
+                            <div className="bg-white p-6 rounded-md mb-8 inline-flex group-hover:scale-110 transition-transform duration-500 border border-slate-100">
                                 {service.icon}
                             </div>
                             <h3 className="text-xl font-black text-slate-800 mb-4 italic uppercase tracking-tight">{service.title}</h3>

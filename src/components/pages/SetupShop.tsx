@@ -31,7 +31,7 @@ const LocationPicker = ({ position, setPosition }: { position: L.LatLng | null, 
 };
 
 const SetupShop: React.FC = () => {
-    const { user } = useAuthStore();
+    const { user, token } = useAuthStore();
     const navigate = useNavigate();
     const createShop = useMutation(api.shops.createShop);
 
@@ -49,7 +49,7 @@ const SetupShop: React.FC = () => {
 
         try {
             await createShop({
-                ownerId: user.id,
+                token: token || "",
                 name: shopName,
                 latitude: position.lat,
                 longitude: position.lng,
@@ -69,7 +69,7 @@ const SetupShop: React.FC = () => {
             </nav>
 
             <main className="flex-grow flex items-center justify-center p-6">
-                <div className="w-full max-w-4xl bg-white rounded-[2.5rem] shadow-xl border border-slate-100 overflow-hidden flex flex-col md:flex-row">
+                <div className="w-full max-w-4xl bg-white rounded-md shadow-xl border border-slate-100 overflow-hidden flex flex-col md:flex-row">
                     {/* Left Side: Form */}
                     <div className="w-full md:w-1/3 p-8 border-b md:border-b-0 md:border-r border-slate-100">
                         <div className="mb-8">
@@ -78,7 +78,7 @@ const SetupShop: React.FC = () => {
                         </div>
 
                         <form onSubmit={handleSubmit} className="space-y-6">
-                            {error && <div className="text-red-500 text-sm bg-red-50 p-3 rounded-xl border border-red-100 italic">{error}</div>}
+                            {error && <div className="text-red-500 text-sm bg-red-50 p-3 rounded-md border border-red-100 italic">{error}</div>}
 
                             <div className="space-y-2">
                                 <label className="text-sm font-bold text-slate-700 ml-1">Shop Name</label>
@@ -89,7 +89,7 @@ const SetupShop: React.FC = () => {
                                         required
                                         value={shopName}
                                         onChange={(e) => setShopName(e.target.value)}
-                                        className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-[#69b8c4]/20 outline-none transition-all"
+                                        className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border border-slate-200 rounded-md focus:ring-2 focus:ring-[#69b8c4]/20 outline-none transition-all"
                                         placeholder="e.g. Fresh & Clean"
                                     />
                                 </div>
@@ -97,7 +97,7 @@ const SetupShop: React.FC = () => {
 
                             <div className="space-y-2">
                                 <label className="text-sm font-bold text-slate-700 ml-1">Location (Lat, Lng)</label>
-                                <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl text-slate-600 text-xs font-mono">
+                                <div className="p-4 bg-slate-50 border border-slate-200 rounded-md text-slate-600 text-xs font-mono">
                                     {position ? (
                                         <div className="flex justify-between">
                                             <span>{position.lat.toFixed(4)}, {position.lng.toFixed(4)}</span>
@@ -112,7 +112,7 @@ const SetupShop: React.FC = () => {
                             <button
                                 type="submit"
                                 disabled={isLoading || !position || !shopName}
-                                className="w-full bg-[#69b8c4] hover:bg-[#5aa7b3] disabled:bg-slate-200 text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 shadow-lg shadow-[#69b8c4]/20 transition-all border-none"
+                                className="w-full bg-[#69b8c4] hover:bg-[#5aa7b3] disabled:bg-slate-200 text-white font-bold py-4 rounded-md flex items-center justify-center gap-2 shadow-lg shadow-[#69b8c4]/20 transition-all border-none"
                             >
                                 {isLoading ? (
                                     <Loader2 className="animate-spin" size={20} />
@@ -140,7 +140,7 @@ const SetupShop: React.FC = () => {
                             />
                             <LocationPicker position={position} setPosition={setPosition} />
                         </MapContainer>
-                        <div className="absolute top-4 left-4 z-[1000] bg-white/90 backdrop-blur px-4 py-2 rounded-xl border border-slate-200 shadow-sm flex items-center gap-2 pointer-events-none">
+                        <div className="absolute top-4 left-4 z-[1000] bg-white/90 backdrop-blur px-4 py-2 rounded-md border border-slate-200 shadow-sm flex items-center gap-2 pointer-events-none">
                             <MapIcon size={18} className="text-[#69b8c4]" />
                             <span className="text-xs font-bold text-slate-700">Click map to pin your shop</span>
                         </div>
