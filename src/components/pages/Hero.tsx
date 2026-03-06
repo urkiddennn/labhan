@@ -7,7 +7,7 @@ import FAQSection from "../FAQSection";
 import Footer from "../Footer";
 import { Loader2 } from "lucide-react";
 
-// Lazy load the map component since it is heavy and below the fold
+
 const ShopMap = lazy(() => import("../ShopMap"));
 
 const HeroPage: React.FC = () => {
