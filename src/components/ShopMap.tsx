@@ -1,18 +1,11 @@
 import React from "react";
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  LayersControl,
-} from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { Loader2 } from "lucide-react";
 
-const { BaseLayer } = LayersControl;
 // Fix for Leaflet default icon issue
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
